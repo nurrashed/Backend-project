@@ -48,7 +48,7 @@ namespace FilmDatabase.Controllers
             Order newOrder = _mapper.Map<Order>(newOrderDTO);
             _context.Orders.Add(newOrder);
             await _context.SaveChangesAsync();
-
+            //return CreatedAtAction("CreateOrder", newOrder);
             return CreatedAtAction("CreateOrder", _mapper.Map<OrderDTO>(newOrder));
         }
 
