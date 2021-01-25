@@ -13,14 +13,16 @@ namespace FilmDatabase.Controllers
     {
         private readonly FilmContext _context;
         private readonly IMapper _mapper;
-        public OrderController(FilmContext context, IMapper mapper){
+        public OrderController(FilmContext context, IMapper mapper)
+        {
             _context = context;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetOrders(){
-            List<Order> orders = await _context.Orders.Include(o =>o.OrderDetails).ToListAsync();
+        public async Task<ActionResult> GetOrders()
+        {
+            List<Order> orders = await _context.Orders.Include(o => o.OrderDetails).ToListAsync();
 
             List<OrderDTO> orderDTOs = _mapper.Map<List<OrderDTO>>(orders);
 
@@ -29,41 +31,50 @@ namespace FilmDatabase.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetOrderById(int id){
-            Order found = await _context.Orders.Include(o=>o.OrderDetails).FirstOrDefaultAsync(o=>o.Id == id);
+        public async Task<ActionResult> GetOrderById(int id)
+        {
+            Order found = await _context.Orders.Include(o => o.OrderDetails).FirstOrDefaultAsync(o => o.Id == id);
 
-            if(found == null){
+            if (found == null)
+            {
                 return NotFound();
             }
             return Ok(_mapper.Map<OrderDTO>(found));
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateOrder(OrderDTO newOrderDTO){
+        public async Task<ActionResult> CreateOrder(OrderDTO newOrderDTO)
+        {
             Order newOrder = _mapper.Map<Order>(newOrderDTO);
             _context.Orders.Add(newOrder);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("CreateOrder", newOrder);
+            return CreatedAtAction("CreateOrder", _mapper.Map<OrderDTO>(newOrder));
         }
-        
+
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateOrder(int id, Order order){
-            if(id != order.Id){
+        public async Task<IActionResult> UpdateOrder(int id, Order order)
+        {
+            if (id != order.Id)
+            {
                 return BadRequest();
             }
             _context.Entry(order).State = EntityState.Modified;
 
-            try{
+            try
+            {
                 await _context.SaveChangesAsync();
             }
-            catch(DbUpdateConcurrencyException){
-                if(!OrderExists(id)){
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OrderExists(id))
+                {
                     return NotFound();
                 }
-                else{
+                else
+                {
                     throw;
                 }
             }
@@ -72,13 +83,15 @@ namespace FilmDatabase.Controllers
 
         private bool OrderExists(int id)
         {
-            return _context.Orders.Any(e=> e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteOrder(int id){
+        public async Task<ActionResult> DeleteOrder(int id)
+        {
             Order found = await _context.Orders.FindAsync(id);
-            if(found == null){
+            if (found == null)
+            {
                 return NotFound();
             }
             _context.Orders.Remove(found);
