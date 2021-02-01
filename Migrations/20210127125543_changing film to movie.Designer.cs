@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FilmDatabase.Migrations
 {
-    [DbContext(typeof(FilmContext))]
-    [Migration("20210121123731_Inital create")]
-    partial class Initalcreate
+    [DbContext(typeof(MovieContext))]
+    [Migration("20210127125543_changing film to movie")]
+    partial class changingfilmtomovie
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace FilmDatabase.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Film", b =>
+            modelBuilder.Entity("Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,24 +57,24 @@ namespace FilmDatabase.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FilmName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("FilmPrice")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Genre")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ImagePath")
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ReleaseDate")
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Year")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Films");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("Order", b =>
@@ -108,7 +108,7 @@ namespace FilmDatabase.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("FilmId")
+                    b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("OrderId")
@@ -122,7 +122,7 @@ namespace FilmDatabase.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FilmId");
+                    b.HasIndex("MovieId");
 
                     b.HasIndex("OrderId");
 
@@ -142,9 +142,9 @@ namespace FilmDatabase.Migrations
 
             modelBuilder.Entity("OrderDetail", b =>
                 {
-                    b.HasOne("Film", "Film")
+                    b.HasOne("Movie", "Movie")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("FilmId")
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -154,7 +154,7 @@ namespace FilmDatabase.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Film");
+                    b.Navigation("Movie");
 
                     b.Navigation("Order");
                 });
@@ -164,7 +164,7 @@ namespace FilmDatabase.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Film", b =>
+            modelBuilder.Entity("Movie", b =>
                 {
                     b.Navigation("OrderDetails");
                 });

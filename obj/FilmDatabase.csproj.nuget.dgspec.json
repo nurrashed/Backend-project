@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\FilmDatabase\\FilmDatabase.csproj": {}
+    "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\Fronetend + FilmDatabase\\FilmDatabase\\FilmDatabase.csproj": {}
   },
   "projects": {
-    "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\FilmDatabase\\FilmDatabase.csproj": {
+    "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\Fronetend + FilmDatabase\\FilmDatabase\\FilmDatabase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\FilmDatabase\\FilmDatabase.csproj",
+        "projectUniqueName": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\Fronetend + FilmDatabase\\FilmDatabase\\FilmDatabase.csproj",
         "projectName": "FilmDatabase",
-        "projectPath": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\FilmDatabase\\FilmDatabase.csproj",
+        "projectPath": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\Fronetend + FilmDatabase\\FilmDatabase\\FilmDatabase.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\FilmDatabase\\obj\\",
+        "outputPath": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\Fronetend + FilmDatabase\\FilmDatabase\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

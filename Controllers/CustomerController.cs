@@ -11,9 +11,9 @@ namespace FilmDatabase.Controllers
     [Route("[controller]")]
     public class CustomerController : ControllerBase
     {
-        private readonly FilmContext _context;
+        private readonly MovieContext _context;
         private readonly IMapper _mapper;
-        public CustomerController(FilmContext context, IMapper mapper){
+        public CustomerController(MovieContext context, IMapper mapper){
             _context = context;
             _mapper = mapper;
         }

@@ -8,5 +8,5 @@ public class CustomerDTO{
     public string EmailAddress { get; set; }
     public string PhoneNumber { get; set; }
     public string HomeAddress { get; set; }
-    public ICollection<OrderDTO> Orders { get; set; }
+    //public ICollection<OrderDTO> Orders { get; set; }
 }

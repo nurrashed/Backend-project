@@ -2,8 +2,8 @@ using AutoMapper;
 
 public class AutoMapping: Profile{
     public AutoMapping(){
-        CreateMap<Film, FilmDTO>();
-        CreateMap<FilmDTO, Film>();
+        CreateMap<Movie, MovieDTO>();
+        CreateMap<MovieDTO, Movie>();
 
         CreateMap<OrderDetail, OrderDetailDTO>();
         CreateMap<OrderDetailDTO, OrderDetail>();

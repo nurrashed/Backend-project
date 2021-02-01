@@ -17,6 +17,8 @@ namespace FilmDatabase
 {
     public class Startup
     {
+        public string corsPolicyName = "myAwesomeCorsConfig";       
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,7 +29,7 @@ namespace FilmDatabase
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FilmContext>();
+            services.AddDbContext<MovieContext>();
 
             MapperConfiguration config = new MapperConfiguration(mc=>{
                 mc.AddProfile(new AutoMapping());
@@ -36,6 +38,18 @@ namespace FilmDatabase
             IMapper mapper = config.CreateMapper();
 
             services.AddSingleton(mapper);
+            
+            services.AddCors(options => 
+            {
+                options.AddPolicy(corsPolicyName,
+                builder =>
+                {
+                    builder
+                        .WithOrigins("https://localhost:3001", "http://localhost:3000")
+                        .WithMethods("*")
+                        .AllowAnyHeader();
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -54,9 +68,14 @@ namespace FilmDatabase
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FilmDatabase v1"));
             }
 
+
+            //app.UseCors(corsPolicyName);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors(corsPolicyName);
 
             app.UseAuthorization();
 

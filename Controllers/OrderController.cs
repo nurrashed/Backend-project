@@ -11,9 +11,9 @@ namespace FilmDatabase.Controllers
     [Route("[controller]")]
     public class OrderController : ControllerBase
     {
-        private readonly FilmContext _context;
+        private readonly MovieContext _context;
         private readonly IMapper _mapper;
-        public OrderController(FilmContext context, IMapper mapper)
+        public OrderController(MovieContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -46,13 +46,25 @@ namespace FilmDatabase.Controllers
         public async Task<ActionResult> CreateOrder(OrderDTO newOrderDTO)
         {
             Order newOrder = _mapper.Map<Order>(newOrderDTO);
+            
+            Customer foundCustomer = _context.Customers.FirstOrDefault(c => c.EmailAddress == newOrderDTO.Customer.EmailAddress);
+            if(foundCustomer != null){
+                newOrder.CustomerId = foundCustomer.Id;
+            } else{
+                Customer newCustomer = new Customer();
+                newCustomer.EmailAddress = newOrderDTO.Customer.EmailAddress;
+                _context.Customers.Add(newCustomer);
+                await _context.SaveChangesAsync();
+                newOrder.CustomerId = newCustomer.Id;
+            }
+
             _context.Orders.Add(newOrder);
+        
             await _context.SaveChangesAsync();
             //return CreatedAtAction("CreateOrder", newOrder);
             return CreatedAtAction("CreateOrder", _mapper.Map<OrderDTO>(newOrder));
         }
-
-
+        
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> UpdateOrder(int id, Order order)

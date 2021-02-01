@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZG2iADg9QbPCyrRnqJ8vQ89PRDQd5Q1A4cMPxxESFdoyc74rUKHQ7Kp0rtBEX0vRB92n5qD9eJxfjenPfmTMNA==",
+  "dgSpecHash": "7929k8tv2v2Xx3NaJZazokWH5NtLJE6gyS+p25X9pLr7iX2kBvKTF32S1NEJljsmGebpuptjTiMEN92mrEMgIA==",
   "success": true,
-  "projectFilePath": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\FilmDatabase\\FilmDatabase.csproj",
+  "projectFilePath": "C:\\Rashed\\Front end utvecklare\\backend\\Final Project\\Fronetend + FilmDatabase\\FilmDatabase\\FilmDatabase.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

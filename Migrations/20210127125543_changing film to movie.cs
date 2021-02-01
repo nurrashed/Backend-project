@@ -2,7 +2,7 @@
 
 namespace FilmDatabase.Migrations
 {
-    public partial class Initalcreate : Migration
+    public partial class changingfilmtomovie : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,22 +25,22 @@ namespace FilmDatabase.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Films",
+                name: "Movies",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FilmName = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    FilmPrice = table.Column<int>(type: "INTEGER", nullable: false),
+                    Price = table.Column<int>(type: "INTEGER", nullable: false),
                     Genre = table.Column<string>(type: "TEXT", nullable: true),
                     ActorName = table.Column<string>(type: "TEXT", nullable: true),
-                    ReleaseDate = table.Column<string>(type: "TEXT", nullable: true),
-                    ImagePath = table.Column<string>(type: "TEXT", nullable: true)
+                    Year = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Films", x => x.Id);
+                    table.PrimaryKey("PK_Movies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,16 +73,16 @@ namespace FilmDatabase.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     OrderItemQuantity = table.Column<int>(type: "INTEGER", nullable: false),
                     OrderItemPrice = table.Column<int>(type: "INTEGER", nullable: false),
-                    FilmId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MovieId = table.Column<int>(type: "INTEGER", nullable: false),
                     OrderId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Films_FilmId",
-                        column: x => x.FilmId,
-                        principalTable: "Films",
+                        name: "FK_OrderDetails_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -94,9 +94,9 @@ namespace FilmDatabase.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_FilmId",
+                name: "IX_OrderDetails_MovieId",
                 table: "OrderDetails",
-                column: "FilmId");
+                column: "MovieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderId",
@@ -115,7 +115,7 @@ namespace FilmDatabase.Migrations
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "Films");
+                name: "Movies");
 
             migrationBuilder.DropTable(
                 name: "Orders");
